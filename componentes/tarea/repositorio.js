@@ -18,7 +18,38 @@ function obtenerTareasUsuario(idUsuario) {
     return tareas.populate('usuario').exec();
 }
 
+function modificarTarea(id, descripcion) {
+    return new Promise((resolve, reject) => {
+        Model.findOne({
+            _id: id
+        },
+        (error, tarea) => {
+            if(error){
+                reject(error);
+            }
+    
+            tarea.descripcion = descripcion;
+            resolve(tarea.save());
+        });
+    });  
+}
+
+function eliminarTarea(id) {
+    return new Promise((resolve, reject) => {
+        Model.deleteOne({
+            _id: id
+        },
+        (error) => {
+            if(error) {
+                reject(error);
+            }
+        });
+    });
+}
+
 module.exports = {
     agregarTarea,
-    obtenerTareasUsuario
+    obtenerTareasUsuario,
+    modificarTarea,
+    eliminarTarea
 };
