@@ -4,8 +4,8 @@ function agregarTarea(idUsuario, descripcion) {
     const tarea = {
         usuario: idUsuario,
         descripcion: descripcion,
-        creada: new Date(),
-        modificada: new Date()
+        creado: new Date(),
+        modificado: new Date()
     };
 
     return repositorio.agregarTarea(tarea);
