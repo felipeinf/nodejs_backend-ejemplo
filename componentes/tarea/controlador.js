@@ -16,10 +16,28 @@ function agregarTarea(idUsuario, descripcion) {
 }
 
 function obtenerTareasUsuario(idUsuario) {
+    if(!idUsuario) {
+        return Promise.reject('Datos invalidos');
+    } 
+        
     return repositorio.obtenerTareasUsuario(idUsuario);
+}
+
+function modificarTarea(id, descripcion) {
+    if(!id || !descripcion) {
+        return Promise.reject('Datos invalidos');
+    }
+    
+    return repositorio.modificarTarea(id, descripcion);
+}
+
+function eliminarTarea(id) {
+    return repositorio.eliminarTarea(id);
 }
 
 module.exports = {
     agregarTarea,
-    obtenerTareasUsuario
+    obtenerTareasUsuario,
+    modificarTarea,
+    eliminarTarea
 };
