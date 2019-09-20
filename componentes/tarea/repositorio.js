@@ -5,14 +5,8 @@ function agregarTarea(tarea) {
     return nuevaTarea.save();
 }
 
-async function obtenerTareasUsuario(idUsuario) {
-    try {
-        const tareas = await Model.find({ usuario: idUsuario });
-        return tareas.populate('usuario').exec();
-    } 
-    catch (error) {
-        Promise.reject(error);
-    }
+function obtenerTareasUsuario(idUsuario) {
+    return Model.find({ usuario: idUsuario }).populate('usuario').exec();
 }
 
 function modificarTarea(id, tarea) {
