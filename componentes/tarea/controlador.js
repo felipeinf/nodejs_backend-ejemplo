@@ -1,6 +1,10 @@
 const repositorio = require('./repositorio');
 
 function agregarTarea(idUsuario, descripcion) {
+    if(!idUsuario || !descripcion) {
+        Promise.reject('Datos invalidos');
+    }
+    
     const tarea = {
         usuario: idUsuario,
         descripcion: descripcion,
