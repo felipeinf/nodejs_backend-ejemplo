@@ -41,7 +41,7 @@ router.get('/:uid', async (req, res) => {
     }
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
     const body = req.body;
     const id = req.params.id;
     
@@ -61,7 +61,7 @@ router.patch('/:id', (req, res) => {
     }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     
     try {
