@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const usuarios = controlador.obtenerUsuarios();
+        const usuarios = await controlador.obtenerUsuarios();
 
         res.status(200).send({
             error:'',
