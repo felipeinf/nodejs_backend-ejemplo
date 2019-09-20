@@ -41,4 +41,43 @@ router.get('/:uid', async (req, res) => {
     }
 });
 
+router.patch('/:id', (req, res) => {
+    const body = req.body;
+    const id = req.params.id;
+    
+    try {
+        const tareas = await controlador.modificarTarea(id, body.descripcion);
+
+        res.status(200).send({
+            error: '',
+            body: tareas
+        });
+    } 
+    catch (error) {
+        res.status(500).send({
+            error: 'Error inesperado',
+            body: ''
+        });
+    }
+});
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    
+    try {
+        const tareas = await controlador.eliminarTarea(id);
+
+        res.status(200).send({
+            error: '',
+            body: tareas
+        });
+    } 
+    catch (error) {
+        res.status(500).send({
+            error: 'Error inesperado',
+            body: ''
+        });
+    }
+});
+
 module.exports = router;
