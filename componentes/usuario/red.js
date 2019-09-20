@@ -1,4 +1,5 @@
 const express = require('express');
+const controlador = require('./controlador');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -22,7 +23,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const usuarios = await controlador.obtenerUsuarios();
+        const usuarios = controlador.obtenerUsuarios();
 
         res.status(200).send({
             error:'',
