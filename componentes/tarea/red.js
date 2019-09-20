@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/:uid', (req, res) => {
+router.post('/:uid', async (req, res) => {
     const body = req.body;
     const idUsuario = req.params.uid;
     
