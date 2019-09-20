@@ -8,6 +8,11 @@ function agregarTarea(tarea) {
 function obtenerTareasUsuario(idUsuario) {
     const tareas = Model.find({
         usuario: idUsuario
+    }, 
+    (error) => {
+        if(error) {
+            Promise.reject(error);
+        }
     });
 
     return tareas.populate('usuario').exec();
