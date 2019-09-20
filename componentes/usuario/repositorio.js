@@ -6,18 +6,25 @@ function agregarUsuario(usuario) {
 }
 
 function obtenerUsuarios() {
-    return new Promise((resolve, reject) => {
-        Model.find((error, usuarios) => {
-            if(error) {
-                reject(error);
-            }
+    return Model.find();   
+}
 
-            resolve(usuarios);
-        })
-    });
+function obtenerUsuario(id) {
+    return Model.findOne({_id: id});   
+}
+
+function modificarUsuario(id, usuario) {
+    return Model.findOneAndUpdate({_id: id}, usuario);    
+}
+
+function eliminarUsuario(id) {
+    return Model.findOneAndDelete(id);
 }
 
 module.exports = {
     agregarUsuario,
-    obtenerUsuarios
+    obtenerUsuarios,
+    obtenerUsuario,
+    modificarUsuario,
+    eliminarUsuario
 }
