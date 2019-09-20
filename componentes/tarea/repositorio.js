@@ -6,16 +6,18 @@ function agregarTarea(tarea) {
 }
 
 function obtenerTareasUsuario(idUsuario) {
-    const tareas = Model.find({
-        usuario: idUsuario
-    }, 
-    (error) => {
-        if(error) {
-            Promise.reject(error);
-        }
+    return new Promise((resolve, reject) => {
+        Model.find({
+            usuario: idUsuario
+        }, 
+        (error, tareas) => {
+            if(error) {
+                reject(error);
+            }
+    
+            resolve(tareas.populate('usuario').exec());
+        });
     });
-
-    return tareas.populate('usuario').exec();
 }
 
 function modificarTarea(id, descripcion) {
@@ -36,13 +38,15 @@ function modificarTarea(id, descripcion) {
 
 function eliminarTarea(id) {
     return new Promise((resolve, reject) => {
-        Model.deleteOne({
-            _id: id
-        },
-        (error) => {
+        Model.findOneAndDelete({
+            _id:id
+        }, 
+        (error, tarea) => {
             if(error) {
                 reject(error);
             }
+            
+            resolve(tarea);
         });
     });
 }
