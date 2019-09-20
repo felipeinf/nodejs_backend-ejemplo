@@ -5,50 +5,22 @@ function agregarTarea(tarea) {
     return nuevaTarea.save();
 }
 
-function obtenerTareasUsuario(idUsuario) {
-    return new Promise((resolve, reject) => {
-        Model.find({
-            usuario: idUsuario
-        }, 
-        (error, tareas) => {
-            if(error) {
-                reject(error);
-            }
-    
-            resolve(tareas.populate('usuario').exec());
-        });
-    });
+async function obtenerTareasUsuario(idUsuario) {
+    try {
+        const tareas = await Model.find({ usuario: idUsuario });
+        return tareas.populate('usuario').exec();
+    } 
+    catch (error) {
+        Promise.reject(error);
+    }
 }
 
-function modificarTarea(id, descripcion) {
-    return new Promise((resolve, reject) => {
-        Model.findOne({
-            _id: id
-        },
-        (error, tarea) => {
-            if(error){
-                reject(error);
-            }
-    
-            tarea.descripcion = descripcion;
-            resolve(tarea.save());
-        });
-    });  
+function modificarTarea(id, tarea) {
+    return Model.findOneAndUpdate({_id: id}, tarea).populate('usuario').exec();
 }
 
 function eliminarTarea(id) {
-    return new Promise((resolve, reject) => {
-        Model.findOneAndDelete({
-            _id:id
-        }, 
-        (error, tarea) => {
-            if(error) {
-                reject(error);
-            }
-            
-            resolve(tarea);
-        });
-    });
+    return Model.findOneAndDelete({_id: id}).populate('usuario').exec();
 }
 
 module.exports = {

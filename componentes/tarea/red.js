@@ -46,11 +46,11 @@ router.patch('/:id', async (req, res) => {
     const id = req.params.id;
     
     try {
-        const tareas = await controlador.modificarTarea(id, body.descripcion);
+        const tarea = await controlador.modificarTarea(id, body.descripcion);
 
         res.status(200).send({
             error: '',
-            body: tareas
+            body: tarea
         });
     } 
     catch (error) {
@@ -65,11 +65,11 @@ router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     
     try {
-        const tareas = await controlador.eliminarTarea(id);
+        const tarea = await controlador.eliminarTarea(id);
 
         res.status(200).send({
             error: '',
-            body: tareas
+            body: tarea
         });
     } 
     catch (error) {

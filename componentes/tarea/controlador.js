@@ -28,10 +28,19 @@ function modificarTarea(id, descripcion) {
         return Promise.reject('Datos invalidos');
     }
     
-    return repositorio.modificarTarea(id, descripcion);
+    const tarea = {
+        descripcion: descripcion,
+        modificado: new Date()
+    }
+
+    return repositorio.modificarTarea(id, tarea);
 }
 
 function eliminarTarea(id) {
+    if(!id) {
+        return Promise.reject('Datos invalidos');
+    }
+    
     return repositorio.eliminarTarea(id);
 }
 
