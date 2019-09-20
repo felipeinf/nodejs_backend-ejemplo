@@ -1,12 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const crearRutas = require('./rutas');
+const rutear = require('./rutas');
+const mongo = require('./bd');
+const uri = require('./uri');
 
 const app = express();
 const puerto = 3001;
 
+mongo.uriConexion(uri);
+
 app.use(bodyParser.json());
-crearRutas(app);
+rutear(app);
 app.listen(puerto);
 
 console.log(`Servidor escuchando en http://localhost:${puerto}`);
